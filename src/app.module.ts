@@ -16,9 +16,11 @@ import { AppService } from './app.service';
 @Module({
   imports: [
     CacheModule.register<RedisClientOptions>({
-      store: redisStore as unknown as CacheStoreFactory,
-      host: 'localhost',
-      port: 6379,
+      useFactory: () => ({
+        store: redisStore as unknown as CacheStoreFactory,
+        host: 'localhost',
+        port: 6379,
+      }),
     } as CacheModuleOptions<RedisClientOptions>),
   ],
   controllers: [AppController],
